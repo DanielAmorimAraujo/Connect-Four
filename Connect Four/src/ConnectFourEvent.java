@@ -2,32 +2,22 @@
 Name: Daniel Araujo
 Date: 21 Aug 18
 Title: Connect Four Event
-Purpose: to create a functioning Connect Four game that keeps track of score
-* use several of the programming methods learned in class (arrays, external files, etc.)
+Purpose: to create a functioning Connect Four game
 */
 
 import javax.swing.*; //imports classes needed for the GUI elements
 import java.awt.event.*; //imports classes needed for ItemListener, ActionListener, and ActionEvent
-import java.io.IOException; //imports classes need for IOException
-import java.io.*; //imports classes needed to read and write XML files
 import java.util.*; //imports classes needed for ArrayLists
-//import org.jdom.output.XMLOutputter; //import classes needed to output the XML file
-//import org.jdom.input.SAXBuilder; //imports classes needed for SAXBuilder
-//import org.jdom.JDOMException; //imports classes needed for JDOMException
-//import org.jdom.Document; //imports classes needed for JDOM documents
-//import org.jdom.Element; //imports classes needed for JDOM elements
-import java.util.List; //imports classes needed for Lists
 
 /**
  * creates class that responds to mouse inputs by using ItemListener and ActionListener
  */
 public class ConnectFourEvent implements ItemListener, ActionListener, Runnable {
     ConnectFourGUI gui; //associates the ConnectFourGUI class with the event so that the GUI components can be accessed
-    
-    ImageIcon r = new ImageIcon("ICS4UE_U4A3A1_DanielAraujo - Connect Four (Red Piece).jpg"); //declares ImageIcon variable r and stores the ICS4UE_U4A3A1_DanielAraujo - Connect Four (Red Piece).jpg icon - represents a game board square with a red disc
-    ImageIcon y = new ImageIcon("ICS4UE_U4A3A1_DanielAraujo - Connect Four (Yellow Piece).jpg"); //declares ImageIcon variable y and stores the ICS4UE_U4A3A1_DanielAraujo - Connect Four (Yellow Piece).jpg icon - represents a game board square with a yellow disc
-    ImageIcon rE = new ImageIcon("ICS4UE_U4A3A1_DanielAraujo - Connect Four (End Red Piece).jpg"); //declares ImageIcon variable rE and stores the ICS4UE_U4A3A1_DanielAraujo - Connect Four (End Red Piece).jpg icon - represents a game board square with a red disc that is part of a four in a row
-    ImageIcon yE = new ImageIcon("ICS4UE_U4A3A1_DanielAraujo - Connect Four (End Yellow Piece).jpg"); //declares ImageIcon variable yE and stores the ICS4UE_U4A3A1_DanielAraujo - Connect Four (End Yellow Piece).jpg icon - represents a game board square with a yellow disc that is part of a four in a row
+    ImageIcon r = new javax.swing.ImageIcon(getClass().getResource("/imageresources/Red Piece.jpg")); //declares ImageIcon variable r and stores the Red Piece.jpg icon - represents a game board square with a red disc
+    ImageIcon y = new javax.swing.ImageIcon(getClass().getResource("/imageresources/Yellow Piece.jpg")); //declares ImageIcon variable y and stores the Yellow Piece.jpg icon - represents a game board square with a yellow disc
+    ImageIcon rE = new javax.swing.ImageIcon(getClass().getResource("/imageresources/End Red Piece.jpg")); //declares ImageIcon variable rE and stores the End Red Piece.jpg icon - represents a game board square with a red disc that is part of a four in a row
+    ImageIcon yE = new javax.swing.ImageIcon(getClass().getResource("/imageresources/End Yellow Piece.jpg")); //declares ImageIcon variable yE and stores the End Yellow Piece.jpg icon - represents a game board square with a yellow disc that is part of a four in a row
     
     int intTurn = 0; //declares integer variable intTurn and sets it equal to 0 - used to determine whether its the red disc or yellow discs turn (even number - red; odd number - yellow)
     int intR = 0, intY = 0, intTie = 0; //declares integer variables that will store the number of wins for red, the number of wins for yellow, and the number of ties, respectively
@@ -40,9 +30,6 @@ public class ConnectFourEvent implements ItemListener, ActionListener, Runnable 
     String strPlayer2 = ""; //declares string variable strPlayer2 and sets it equal to "" - stores the second player's name
     String strGameName = ""; //declares string variable strGameName and sets it equal to "" - stores the game's name
     String strWinner = ""; //declares string variable strWinner and sets it equal to "" - stores the winner's name
-    
-    ArrayList<String> scoreList = new ArrayList(); //declares string ArrayList - used to store the score
-    //int intIndex = index(); //declares integer variable intIndex - used to store the next available index in the scoreList ArrayList
     
     /**
      * associates the ConnectFourEvent and ConnectFourGUI files together
@@ -69,12 +56,6 @@ public class ConnectFourEvent implements ItemListener, ActionListener, Runnable 
             newGame(); //calls on the newGame() method
         if (strCommand.equals("Main Menu")) //if statement that exectues if the Main Menu button was pressed
             mainMenu(); //calls on the mainMenu() method
-        //if (strCommand.equals("Scores")) //if statement that exectues if the Scores button was pressed
-        //    score(); //calls on the score() method
-        //if (strCommand.equals("Search")) //if statement that exectues if the Search button was pressed
-        //    search(); //calls on the search() method
-        //if (strCommand.equals("View Best Scores")) //if statement that exectues if the View Best Score button was pressed
-         //   highScore(); //calls on the highScore() method
         //if statements the correspond to the spots on the connect four gameboard - each calls on the button() method and passes their index for the parameteres
         if (strCommand.equals("1"))
             button(0,0);
@@ -167,16 +148,20 @@ public class ConnectFourEvent implements ItemListener, ActionListener, Runnable 
      * starts the game by making the connect four game board visible and setting the required variables
      */
     void play() {
-        gui.pnlMainMenu.setVisible(false); //sets the pnlMainMenu panel as not visible
-        gui.splGame.setVisible(true); //sets the splGame panel as visible
+        if (gui.txtPlayer1.getText().equals("") || gui.txtPlayer2.getText().equals("") || gui.txtGameName.getText().equals(""))
+            JOptionPane.showMessageDialog(null, "Please fill in all the boxes!");
+        else {
+            gui.pnlMainMenu.setVisible(false); //sets the pnlMainMenu panel as not visible
+            gui.splGame.setVisible(true); //sets the splGame panel as visible
+            
+            strPlayer1 = gui.txtPlayer1.getText(); //sets the strPlayer1 as the user's input in the txtPlayer1 text field
+            strPlayer2 = gui.txtPlayer2.getText(); //sets the strPlayer1 as the user's input in the txtPlayer2 text field
+            strGameName = gui.txtGameName.getText(); //sets the strGameName as the user's input in the txtGameName text field
         
-        strPlayer1 = gui.txtPlayer1.getText(); //sets the strPlayer1 as the user's input in the txtPlayer1 text field
-        strPlayer2 = gui.txtPlayer2.getText(); //sets the strPlayer1 as the user's input in the txtPlayer2 text field
-        strGameName = gui.txtGameName.getText(); //sets the strGameName as the user's input in the txtGameName text field
+            gui.txtTurn.setText(strPlayer1 + "'s turn"); //sets the txt informing the user who's turn it is
         
-        gui.txtTurn.setText(strPlayer1 + "'s turn"); //sets the txt informing the user who's turn it is
-        
-        blnStart = true; //sets the blnStart variable as true - game started
+            blnStart = true; //sets the blnStart variable as true - game started
+        }
     }
     
     /**
@@ -212,24 +197,6 @@ public class ConnectFourEvent implements ItemListener, ActionListener, Runnable 
      * resets the board with the same players and game name
      */
     void playAgain() {
-        //if statement that adds the games information the the scoreList arraylist
-        /*if (intR + intY + intTie < 2) {
-            scoreList.add(intIndex, strGameName);
-            scoreList.add(intIndex + 1, strPlayer1);
-            scoreList.add(intIndex + 2, strPlayer2);
-            scoreList.add(intIndex + 3, Integer.toString(intR));
-            scoreList.add(intIndex + 4, Integer.toString(intY));
-            scoreList.add(intIndex + 5, Integer.toString(intTie));
-        } else { //else condition that sets the values in the arraylist to the games information given that it is the same game
-            scoreList.set(intIndex, strGameName);
-            scoreList.set(intIndex + 1, strPlayer1);
-            scoreList.set(intIndex + 2, strPlayer2);
-            scoreList.set(intIndex + 3, Integer.toString(intR));
-            scoreList.set(intIndex + 4, Integer.toString(intY));
-            scoreList.set(intIndex + 5, Integer.toString(intTie));
-        }
-        
-        writingScore(); //calls on the writingScore() method*/
         reset(); //calls on the reset() method
     }
     
@@ -238,17 +205,7 @@ public class ConnectFourEvent implements ItemListener, ActionListener, Runnable 
      * resets the game board allowing for the input of new players and game name
      */
     void newGame() {
-        //adds the games information to the scoreList array
-        scoreList.add(strGameName);
-        scoreList.add(strPlayer1);
-        scoreList.add(strPlayer2);
-        scoreList.add(Integer.toString(intR));
-        scoreList.add(Integer.toString(intY));
-        scoreList.add(Integer.toString(intTie));
-        
-        //writingScore(); //calls on the writingScore() method
         mainMenu(); //calls on the mainMenu() method
-        
     }
     
     /**
@@ -272,14 +229,13 @@ public class ConnectFourEvent implements ItemListener, ActionListener, Runnable 
         //sets all the panels as ont visible except for the pnlMainMenu panel
         gui.pnlMainMenu.setVisible(true);
         gui.splGame.setVisible(false);
-        gui.pnlScores.setVisible(false);
     }
     
     /**
      * one of the buttons on the Connect Four game board is pressed
      * adds the appropriate disc to the column if possible
      * @param intR - integer variable that represents the row of the button
-     * @param intC  - integer variable that represents the column of the butotn
+     * @param intC  - integer variable that represents the column of the button
      */
     public void button(int intR, int intC) {
         int intRow = 5; //declares intRow and sets it equal to 5 - bottom row
@@ -307,11 +263,10 @@ public class ConnectFourEvent implements ItemListener, ActionListener, Runnable 
                 winner(); //calls on the winner() method
             }
         }
-        else if  (intBoardValues[0][intC] != 0) { //else statement that executes if the column is occupied
+        else if (blnEnd) //else statement that executes if the game has ended
+            JOptionPane.showMessageDialog(null, "The game has ended. Please select Play Again to play again or press New Game to start a new game.");
+        else if  (intBoardValues[0][intC] != 0) //else statement that executes if the column is occupied
             JOptionPane.showMessageDialog(null, "Column is full. Please select another.");
-        }
-        else if (blnEnd = true) //else statement that executes if the game has ended
-            JOptionPane.showMessageDialog(null, "The game has ended. Please select Reset to play again.");
     }
     
     /**
@@ -387,129 +342,10 @@ public class ConnectFourEvent implements ItemListener, ActionListener, Runnable 
     }
     
     void output() {
-        gui.txtScore.setText(strPlayer1 + " wins: " + intR + "\t\t" + strPlayer2 + " wins: " + intY + "\t\tTies: " + intTie);
+        gui.txtScore.setText(strPlayer1 + " wins: " + intR + "\n" + strPlayer2 + " wins: " + intY + "\nTies: " + intTie);
+        gui.txtTurn.setText("Game Over");
     }
-    /*
-    void writingScore() {
-        try {
-            Element score = new Element("score");
-            Document doc = new Document(score);
-            doc.setRootElement(score);
-            
-            score.addContent(new Element("index").setText(Integer.toString(intIndex + 6)));
-            
-            for (int i = 0; i < scoreList.size(); i += 6) {
-                
-                Element game = new Element("game");
-                game.addContent(new Element("gameName").setText(scoreList.get(i)));
-                game.addContent(new Element("player1").setText(scoreList.get(i + 1)));
-                game.addContent(new Element("player2").setText(scoreList.get(i + 2)));
-                game.addContent(new Element("player1Wins").setText(scoreList.get(i + 3)));
-                game.addContent(new Element("player2Wins").setText(scoreList.get(i + 4)));
-                game.addContent(new Element("ties").setText(scoreList.get(i + 5)));
-                
-                doc.getRootElement().addContent(game);
-                
-                XMLOutputter output = new XMLOutputter(); //declares XMLOutputter
-                output.output(doc, new FileWriter("Score.txt")); //outputs doc using FileWriter - calls file "overwatch.txt"
-            }
-        }
-        catch (IOException io) {}
-    }
-    
-    void score() {                
-        gui.pnlMainMenu.setVisible(false);
-        gui.pnlScores.setVisible(true);
         
-        String strOutput = "";
-        
-        for (int i = 0; i < scoreList.size(); i += 6) {
-            strOutput += "Game Name: " + scoreList.get(i) + " | ";
-            strOutput += "Player 1: " + scoreList.get(i + 1) + " | ";
-            strOutput += "Player 2: " + scoreList.get(i + 2) + " | ";
-            strOutput += "Player 1 wins: " + scoreList.get(i + 3) + " | ";
-            strOutput += "Player 2 wins: " + scoreList.get(i + 4) + " | ";
-            strOutput += "Ties: " + scoreList.get(i + 5) + "\n";
-            }
-        gui.txtScores.setText(strOutput);
-    }
-    
-    void search() {
-        String strSearch = gui.txtSearch.getText();
-        
-        for (int i = 0; i < scoreList.size(); i += 6) {
-            if (strSearch.equals(scoreList.get(i)))
-                gui.txtScores.setText("Game Name: " + scoreList.get(i) + " | "
-                        + "Player 1: " + scoreList.get(i + 1) + " | "
-                        + "Player 2: " + scoreList.get(i + 2) + " | "
-                        + "Player 1 wins: " + scoreList.get(i + 3) + " | "
-                        + "Player 2 wins: " + scoreList.get(i + 4) + " | "
-                        + "Ties: " + scoreList.get(i + 5) + ""
-                );
-        }
-    }
-    
-    void highScore() {
-        System.out.println("hello");
-        for (int i = 3; i < scoreList.size(); i += 6) {
-            for (int j = i + 6; j < scoreList.size(); j += 6)
-                if (Math.max(Integer.parseInt(scoreList.get(i)),Integer.parseInt(scoreList.get(i+1))) < Math.max(Integer.parseInt(scoreList.get(j)),Integer.parseInt(scoreList.get(j+1)))) {
-                    String strTemp = scoreList.get(i - 3);
-                    scoreList.set(i - 3, scoreList.get(j - 3));
-                    scoreList.set(j - 3, strTemp);
-                    
-                    strTemp = scoreList.get(i - 2);
-                    scoreList.set(i - 2, scoreList.get(j - 2));
-                    scoreList.set(j - 2, strTemp);
-                    
-                    strTemp = scoreList.get(i - 1);
-                    scoreList.set(i - 1, scoreList.get(j - 1));
-                    scoreList.set(j - 1, strTemp);
-                    
-                    strTemp = scoreList.get(i);
-                    scoreList.set(i, scoreList.get(j));
-                    scoreList.set(j, strTemp);
-                    
-                    strTemp = scoreList.get(i + 1);
-                    scoreList.set(i + 1, scoreList.get(j + 1));
-                    scoreList.set(j + 1, strTemp);
-                    
-                    strTemp = scoreList.get(i + 2);
-                    scoreList.set(i + 2, scoreList.get(j + 2));
-                    scoreList.set(j + 2, strTemp);
-                }
-        }
-        score();
-    }
-    
-    int index() {
-        SAXBuilder builder = new SAXBuilder();
-        File sFile = new File ("Score.txt");
-        
-        try {
-            Document doc = (Document) builder.build(sFile);
-            Element rootNode = doc.getRootElement();
-            List list = rootNode.getChildren("game");
-            
-            int intIndexTemp = Integer.parseInt(rootNode.getChildText("index"));
-            
-            for (int i = 0; i < intIndexTemp; i += 6) {
-                Element node = (Element) list.get(i / 6);
-                
-                scoreList.add(node.getChildText("gameName"));
-                scoreList.add(node.getChildText("player1"));
-                scoreList.add(node.getChildText("player2"));
-                scoreList.add(node.getChildText("player1Wins"));
-                scoreList.add(node.getChildText("player2Wins"));
-                scoreList.add(node.getChildText("ties"));
-            }
-            
-            return intIndexTemp;
-        }
-        catch (JDOMException jdomex) {}
-        return 0;
-    } */
-    
     @Override
     public void itemStateChanged(ItemEvent ie) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.

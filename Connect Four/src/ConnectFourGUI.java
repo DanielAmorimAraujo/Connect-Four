@@ -2,8 +2,7 @@
 Name: Daniel Araujo
 Date: 21 Aug 18
 Title: Connect Four GUI
-Purpose: to create a functioning Connect Four GUI that keeps track of score
-* use several of the programming methods learned in class (arrays, external files, etc.)
+Purpose: to create a functioning Connect Four GUI
 */
 
 import javax.swing.*; //imports classes required for the GUI elements
@@ -12,7 +11,7 @@ public class ConnectFourGUI extends javax.swing.JFrame {
     
     ConnectFourEvent connectFour = new ConnectFourEvent(this); //joins the ConnectFourGUI and ConnectFourEvent program so they work together
     JButton[][] btnGameBoard = new JButton [6][7]; //declares a 2-d button array that is 6 by 7 - represents game board
-    ImageIcon empty = new ImageIcon("ICS4UE_U4A3A1_DanielAraujo - Connect Four (Empty Piece).jpg"); //declares ImageIcon variable empty and stores the ICS4UE_U4A3A1_DanielAraujo - Connect Four (Empty Piece).jpg icon - represents an empty Game Board square
+    ImageIcon empty = new javax.swing.ImageIcon(getClass().getResource("/imageresources/Empty Piece.jpg")); //declares ImageIcon variable empty and stores the Empty Piece.jpg icon - represents an empty Game Board square
     
     /**
      * Creates new form ConnectFourGUI
@@ -34,20 +33,14 @@ public class ConnectFourGUI extends javax.swing.JFrame {
             }
         }
         btnPlay.addActionListener(connectFour); //makes the ConnectFourEvent file ready to handle the Play (btnPlay) button being clicked
-        btnMainMenu.addActionListener(connectFour); //makes the ConnectFourEvent file ready to handle the Main Menu (btnMainMenu) button being clicked
         btnMainMenu1.addActionListener(connectFour); //makes the ConnectFourEvent file ready to handle the Main Menu (btnMainMenu1) button being clicked
         btnExit.addActionListener(connectFour); //makes the ConnectFourEvent file ready to handle the Exit (btnExit) button being clicked
-        btnExit2.addActionListener(connectFour); //makes the ConnectFourEvent file ready to handle the Exit (btnExit2) button being clicked
         btnExit3.addActionListener(connectFour); //makes the ConnectFourEvent file ready to handle the Exit (btnExit3) button being clicked
         btnPlayAgain.addActionListener(connectFour); //makes the ConnectFourEvent file ready to handle the Play Again (btnPlayAgain) button being clicked
         btnNewGame.addActionListener(connectFour); //makes the ConnectFourEvent file ready to handle the New Game (btnNewGame) button being clicked
-        btnScores.addActionListener(connectFour); //makes the ConnectFourEvent file ready to handle the Scores (btnScores) button being clicked
-        btnSearch.addActionListener(connectFour); //makes the ConnectFourEvent file ready to handle the Search (btnSearch) button being clicked
-        btnHighScore.addActionListener(connectFour); //makes the ConnectFourEvent file ready to handle the High Score (btnHighScore) button being clicked
         
         pnlMainMenu.setVisible(true); //sets the pnlMainMenu panel visible
         splGame.setVisible(false); //sets the splGame panel as not visible
-        pnlScores.setVisible(false); //sets the pnlScores panel as not visible
     }
 
     /**
@@ -69,7 +62,6 @@ public class ConnectFourGUI extends javax.swing.JFrame {
         lblPlayer2 = new javax.swing.JLabel();
         txtPlayer2 = new javax.swing.JTextField();
         btnPlay = new javax.swing.JButton();
-        btnScores = new javax.swing.JButton();
         btnExit = new javax.swing.JButton();
         splGame = new javax.swing.JSplitPane();
         pnlGameBoard = new javax.swing.JPanel();
@@ -81,16 +73,6 @@ public class ConnectFourGUI extends javax.swing.JFrame {
         txtScore = new javax.swing.JTextArea();
         btnExit3 = new javax.swing.JButton();
         btnMainMenu1 = new javax.swing.JButton();
-        pnlScores = new javax.swing.JPanel();
-        lblScoresTitle = new javax.swing.JLabel();
-        scrScores = new javax.swing.JScrollPane();
-        txtScores = new javax.swing.JTextArea();
-        lblSearch = new javax.swing.JLabel();
-        txtSearch = new javax.swing.JTextField();
-        btnSearch = new javax.swing.JButton();
-        btnHighScore = new javax.swing.JButton();
-        btnMainMenu = new javax.swing.JButton();
-        btnExit2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Connect Four");
@@ -125,9 +107,6 @@ public class ConnectFourGUI extends javax.swing.JFrame {
         btnPlay.setFont(new java.awt.Font("Dubai", 1, 14)); // NOI18N
         btnPlay.setText("Play");
 
-        btnScores.setFont(new java.awt.Font("Dubai", 1, 14)); // NOI18N
-        btnScores.setText("Scores");
-
         btnExit.setFont(new java.awt.Font("Dubai", 1, 14)); // NOI18N
         btnExit.setText("Exit");
 
@@ -156,7 +135,6 @@ public class ConnectFourGUI extends javax.swing.JFrame {
                     .addGroup(pnlMainMenuLayout.createSequentialGroup()
                         .addGap(312, 312, 312)
                         .addGroup(pnlMainMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btnScores, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnPlay, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -187,9 +165,7 @@ public class ConnectFourGUI extends javax.swing.JFrame {
                     .addComponent(txtPlayer2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(35, 35, 35)
                 .addComponent(btnPlay)
-                .addGap(18, 18, 18)
-                .addComponent(btnScores)
-                .addGap(18, 18, 18)
+                .addGap(76, 76, 76)
                 .addComponent(btnExit)
                 .addContainerGap(190, Short.MAX_VALUE))
         );
@@ -235,9 +211,7 @@ public class ConnectFourGUI extends javax.swing.JFrame {
                     .addGroup(pnlGameBottomLayout.createSequentialGroup()
                         .addGroup(pnlGameBottomLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnNewGame)
-                            .addGroup(pnlGameBottomLayout.createSequentialGroup()
-                                .addComponent(btnPlayAgain)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 1, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(btnPlayAgain))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 155, Short.MAX_VALUE)
                         .addComponent(txtTurn, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(145, 145, 145))
@@ -277,87 +251,6 @@ public class ConnectFourGUI extends javax.swing.JFrame {
 
         splGame.setBottomComponent(pnlGameBottom);
 
-        lblScoresTitle.setFont(new java.awt.Font("Dubai", 1, 24)); // NOI18N
-        lblScoresTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblScoresTitle.setText("Scores");
-
-        txtScores.setEditable(false);
-        txtScores.setColumns(20);
-        txtScores.setFont(new java.awt.Font("Dubai Light", 0, 12)); // NOI18N
-        txtScores.setLineWrap(true);
-        txtScores.setRows(5);
-        txtScores.setWrapStyleWord(true);
-        scrScores.setViewportView(txtScores);
-
-        lblSearch.setFont(new java.awt.Font("Dubai", 1, 14)); // NOI18N
-        lblSearch.setText("Search for game (by Game Name):");
-
-        txtSearch.setFont(new java.awt.Font("Dubai", 1, 14)); // NOI18N
-
-        btnSearch.setFont(new java.awt.Font("Dubai", 1, 14)); // NOI18N
-        btnSearch.setText("Search");
-
-        btnHighScore.setFont(new java.awt.Font("Dubai", 1, 14)); // NOI18N
-        btnHighScore.setText("View Best Scores");
-
-        btnMainMenu.setFont(new java.awt.Font("Dubai", 1, 12)); // NOI18N
-        btnMainMenu.setText("Main Menu");
-
-        btnExit2.setFont(new java.awt.Font("Dubai", 1, 12)); // NOI18N
-        btnExit2.setText("Exit");
-
-        javax.swing.GroupLayout pnlScoresLayout = new javax.swing.GroupLayout(pnlScores);
-        pnlScores.setLayout(pnlScoresLayout);
-        pnlScoresLayout.setHorizontalGroup(
-            pnlScoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lblScoresTitle, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(pnlScoresLayout.createSequentialGroup()
-                .addGap(50, 50, 50)
-                .addComponent(scrScores, javax.swing.GroupLayout.PREFERRED_SIZE, 635, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(51, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlScoresLayout.createSequentialGroup()
-                .addGroup(pnlScoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnlScoresLayout.createSequentialGroup()
-                        .addGap(109, 109, 109)
-                        .addComponent(lblSearch)
-                        .addGap(18, 18, 18)
-                        .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnSearch))
-                    .addGroup(pnlScoresLayout.createSequentialGroup()
-                        .addGap(289, 289, 289)
-                        .addComponent(btnHighScore)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnlScoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnMainMenu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnExit2, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(43, 43, 43))
-        );
-        pnlScoresLayout.setVerticalGroup(
-            pnlScoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlScoresLayout.createSequentialGroup()
-                .addGap(32, 32, 32)
-                .addComponent(lblScoresTitle)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(scrScores, javax.swing.GroupLayout.PREFERRED_SIZE, 465, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(pnlScoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnlScoresLayout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addGroup(pnlScoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblSearch)
-                            .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnSearch))
-                        .addGap(18, 18, 18)
-                        .addComponent(btnHighScore)
-                        .addContainerGap(95, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlScoresLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnMainMenu)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnExit2)
-                        .addGap(9, 9, 9))))
-        );
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -365,16 +258,12 @@ public class ConnectFourGUI extends javax.swing.JFrame {
             .addComponent(splGame)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(pnlMainMenu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(pnlScores, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(splGame, javax.swing.GroupLayout.DEFAULT_SIZE, 762, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(pnlMainMenu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(pnlScores, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -418,36 +307,25 @@ public class ConnectFourGUI extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnExit;
-    private javax.swing.JButton btnExit2;
     private javax.swing.JButton btnExit3;
-    private javax.swing.JButton btnHighScore;
-    private javax.swing.JButton btnMainMenu;
     private javax.swing.JButton btnMainMenu1;
     private javax.swing.JButton btnNewGame;
     private javax.swing.JButton btnPlay;
     private javax.swing.JButton btnPlayAgain;
-    private javax.swing.JButton btnScores;
-    private javax.swing.JButton btnSearch;
     private javax.swing.JLabel lblGameName;
     private javax.swing.JLabel lblInstructions;
     private javax.swing.JLabel lblMainTitle;
     private javax.swing.JLabel lblPlayer1;
     private javax.swing.JLabel lblPlayer2;
-    private javax.swing.JLabel lblScoresTitle;
-    private javax.swing.JLabel lblSearch;
     private javax.swing.JPanel pnlGameBoard;
     private javax.swing.JPanel pnlGameBottom;
     public javax.swing.JPanel pnlMainMenu;
-    public javax.swing.JPanel pnlScores;
     private javax.swing.JScrollPane scrScore;
-    private javax.swing.JScrollPane scrScores;
     public javax.swing.JSplitPane splGame;
     public javax.swing.JTextField txtGameName;
     public javax.swing.JTextField txtPlayer1;
     public javax.swing.JTextField txtPlayer2;
     public javax.swing.JTextArea txtScore;
-    public javax.swing.JTextArea txtScores;
-    public javax.swing.JTextField txtSearch;
     public javax.swing.JTextField txtTurn;
     // End of variables declaration//GEN-END:variables
 }
