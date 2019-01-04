@@ -80,7 +80,7 @@ public class ConnectFourGUI extends javax.swing.JFrame {
 
         pnlMainMenu.setForeground(new java.awt.Color(153, 255, 255));
 
-        lblMainTitle.setFont(new java.awt.Font("Curlz MT", 1, 48)); // NOI18N
+        lblMainTitle.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 48)); // NOI18N
         lblMainTitle.setForeground(new java.awt.Color(204, 0, 0));
         lblMainTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblMainTitle.setText("Connect Four");
@@ -167,7 +167,7 @@ public class ConnectFourGUI extends javax.swing.JFrame {
                 .addComponent(btnPlay)
                 .addGap(76, 76, 76)
                 .addComponent(btnExit)
-                .addContainerGap(190, Short.MAX_VALUE))
+                .addContainerGap(198, Short.MAX_VALUE))
         );
 
         splGame.setDividerLocation(600);
@@ -184,15 +184,16 @@ public class ConnectFourGUI extends javax.swing.JFrame {
         btnNewGame.setFont(new java.awt.Font("Dubai", 1, 12)); // NOI18N
         btnNewGame.setText("New Game");
 
+        txtTurn.setEditable(false);
         txtTurn.setFont(new java.awt.Font("Dubai", 1, 12)); // NOI18N
         txtTurn.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+
+        scrScore.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
 
         txtScore.setEditable(false);
         txtScore.setColumns(20);
         txtScore.setFont(new java.awt.Font("Dubai", 1, 12)); // NOI18N
-        txtScore.setLineWrap(true);
         txtScore.setRows(5);
-        txtScore.setWrapStyleWord(true);
         scrScore.setViewportView(txtScore);
 
         btnExit3.setFont(new java.awt.Font("Dubai", 1, 12)); // NOI18N
@@ -214,20 +215,19 @@ public class ConnectFourGUI extends javax.swing.JFrame {
                             .addComponent(btnPlayAgain))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 155, Short.MAX_VALUE)
                         .addComponent(txtTurn, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(145, 145, 145))
+                        .addGap(82, 82, 82))
                     .addGroup(pnlGameBottomLayout.createSequentialGroup()
                         .addComponent(btnMainMenu1)
                         .addGap(46, 46, 46)
                         .addComponent(btnExit3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addComponent(scrScore, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(scrScore, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(19, 19, 19))
         );
         pnlGameBottomLayout.setVerticalGroup(
             pnlGameBottomLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlGameBottomLayout.createSequentialGroup()
                 .addGroup(pnlGameBottomLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(scrScore, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(pnlGameBottomLayout.createSequentialGroup()
                         .addGroup(pnlGameBottomLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(pnlGameBottomLayout.createSequentialGroup()
@@ -244,9 +244,9 @@ public class ConnectFourGUI extends javax.swing.JFrame {
                                 .addComponent(btnExit3))
                             .addGroup(pnlGameBottomLayout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btnMainMenu1)))
-                        .addGap(0, 9, Short.MAX_VALUE)))
-                .addContainerGap())
+                                .addComponent(btnMainMenu1))))
+                    .addComponent(scrScore, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         splGame.setBottomComponent(pnlGameBottom);

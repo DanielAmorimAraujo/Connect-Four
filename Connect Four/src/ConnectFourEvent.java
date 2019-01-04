@@ -158,7 +158,7 @@ public class ConnectFourEvent implements ItemListener, ActionListener, Runnable 
             strPlayer2 = gui.txtPlayer2.getText(); //sets the strPlayer1 as the user's input in the txtPlayer2 text field
             strGameName = gui.txtGameName.getText(); //sets the strGameName as the user's input in the txtGameName text field
         
-            gui.txtTurn.setText(strPlayer1 + "'s turn"); //sets the txt informing the user who's turn it is
+            gui.txtTurn.setText(strPlayer1 + "'s Turn"); //sets the txt informing the user who's turn it is
         
             blnStart = true; //sets the blnStart variable as true - game started
         }
@@ -225,6 +225,7 @@ public class ConnectFourEvent implements ItemListener, ActionListener, Runnable 
         gui.txtGameName.setText("");
         gui.txtPlayer1.setText("");
         gui.txtPlayer2.setText("");
+        gui.txtScore.setText("");
         
         //sets all the panels as ont visible except for the pnlMainMenu panel
         gui.pnlMainMenu.setVisible(true);
@@ -257,7 +258,7 @@ public class ConnectFourEvent implements ItemListener, ActionListener, Runnable 
                 else { //if statement that executes if intTurn is positive - yellow disc
                     gui.btnGameBoard[intRow][intC].setIcon(y); //sets the icon at the index as y
                     intBoardValues[intRow][intC] = 2; //sets the intBoardValue at the index as 2
-                    gui.txtTurn.setText(strPlayer1 + " 's Turn"); //changes who's turn it is
+                    gui.txtTurn.setText(strPlayer1 + "'s Turn"); //changes who's turn it is
                 }
                 intTurn++; //increases intTurn by 1
                 winner(); //calls on the winner() method
